@@ -1,6 +1,18 @@
-﻿@{
+﻿@model IList<Person>
+@{
     ViewData["title"] = "Management";
 }
 
 <h1>People Management</h1>
 <p>Here you can manage your people.</p>
+
+<section>
+    <header>
+        <h1>Who is who</h1>
+    </header>
+
+    @foreach (var person in Model)
+    {
+        <partial name="PersonPartial" model="person" />
+    }
+</section>

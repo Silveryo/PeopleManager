@@ -6,16 +6,11 @@ namespace PeopleManager.Ui.WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
 
         public IActionResult Index()
         {
-            return View();
+            var people = GetPeople();
+            return View(people);
         }
 
         public IActionResult Privacy()
@@ -23,10 +18,26 @@ namespace PeopleManager.Ui.WebApp.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        private IList<Person> GetPeople()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+
+            return new List<Person>
+            {
+                new()
+                {
+                    FirstName = "Bavo",
+                    LastName = "Ketels",
+                    Description = "This is the description of the person",
+                    Email = "bavo.ketels@vives.be"
+                },
+                new()
+                {
+                    FirstName = "Zdeněk",
+                    LastName = "Odehnal",
+                    Description = "This is the description of the person",
+                    Email = "zdenek.odehnal@student.vives.be"
+                }
+            };
         }
     }
 }
